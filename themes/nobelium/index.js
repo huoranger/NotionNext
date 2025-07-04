@@ -115,17 +115,17 @@ const LayoutIndex = props => {
     'HOME_POETRY_LIST',
   )
   return (
-    <ul>
+    <div class='poetry text-base w-auto max-w-[26em] mx-auto p-[10em_1em] text-center'>
         {HomePoetryList?.map((poe, index) => (
-            <li key={index}>{poe}</li>
+            <p key={index}>{poe}</p>
         ))}
-    </ul>
+    </div>
   )
 }
 /**
  * 文章列表
  */
-const LayoutArticle = props => {
+const LayoutPost = props => {
   return <LayoutPostList {...props} topSlot={<Announcement {...props} />} />
 }
 
@@ -384,5 +384,6 @@ export {
   LayoutSearch,
   LayoutSlug,
   LayoutTagIndex,
+  LayoutPost,
   CONFIG as THEME_CONFIG
 }

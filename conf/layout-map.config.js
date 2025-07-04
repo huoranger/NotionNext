@@ -26,6 +26,6 @@ module.exports = {
     '/sign-in/[[...index]]': 'LayoutSignIn',
     '/sign-up/[[...index]]': 'LayoutSignUp',
     '/dashboard/[[...index]]': 'LayoutDashboard',
-    '/article': 'LayoutPostList'
+    '/post': 'LayoutPost'
   }
 }
