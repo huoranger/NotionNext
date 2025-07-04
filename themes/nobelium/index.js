@@ -115,7 +115,7 @@ const LayoutIndex = props => {
     'HOME_POETRY_LIST',
   )
   return (
-    <div class='poetry text-base w-auto max-w-[26em] mx-auto p-[10em_1em] text-center'>
+    <div class='poetry text-base w-auto max-w-[26em] mx-auto p-[5em_1em] text-center'>
         {HomePoetryList?.map((poe, index) => (
             <p key={index}>{poe}</p>
         ))}
