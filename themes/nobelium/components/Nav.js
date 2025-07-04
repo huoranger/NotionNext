@@ -52,7 +52,7 @@ const Nav = props => {
         id='sticky-nav'
         ref={navRef}>
         <div className='flex items-center'>
-          <Link href='/' aria-label={siteConfig('TITLE')}>
+          <Link href='/' aria-label={siteConfig('TITLE')} className='flex items-center'>
             <div className='h-8 w-8'>
               {/* <SvgIcon/> */}
               {siteConfig('NOBELIUM_NAV_NOTION_ICON') ? (
@@ -66,8 +66,7 @@ const Nav = props => {
                 <SvgIcon />
               )}
             </div>
-          </Link>
-          {post ? (
+            {post ? (
             <p className='ml-2 max-h-12 line-clamp-2 overflow-ellipsis font-medium text-gray-800 dark:text-gray-300 header-name'>
               {post?.title}
             </p>
@@ -77,6 +76,8 @@ const Nav = props => {
               {/* ,{' '}<span className="font-normal">{siteConfig('DESCRIPTION')}</span> */}
             </p>
           )}
+          </Link>
+          
         </div>
         <NavBar {...props} />
       </div>
@@ -140,7 +141,7 @@ const NavBar = props => {
   }
 
   return (
-    <div className='flex-shrink-0 flex'>
+    <div className='flex-shrink-0 flex menus'>
       <ul className='hidden md:flex flex-row'>
         {links?.map((link, index) => (
           <MenuItemDrop key={index} link={link} />

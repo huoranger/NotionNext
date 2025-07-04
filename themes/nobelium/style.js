@@ -6,12 +6,21 @@
  */
 const Style = () => {
   return <style jsx global>{`
+    body {
+      font-family: "glyph-correction", "I.MingCP", Amstelvar;
+    }
+
+    // logo 名字
+    .header-name {
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      line-height: 1
+    }
     
     // 底色
     .dark body{
-        background-color: black;
+      background-color: black;
     }
-
   `}</style>
 }
 

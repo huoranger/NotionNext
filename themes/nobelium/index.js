@@ -110,6 +110,22 @@ const LayoutBase = props => {
  * @returns
  */
 const LayoutIndex = props => {
+  // return <LayoutPostList {...props} topSlot={<Announcement {...props} />} />
+  const HomePoetryList = siteConfig(
+    'HOME_POETRY_LIST',
+  )
+  return (
+    <ul>
+        {HomePoetryList?.map((poe, index) => (
+            <li key={index}>{poe}</li>
+        ))}
+    </ul>
+  )
+}
+/**
+ * 文章列表
+ */
+const LayoutArticle = props => {
   return <LayoutPostList {...props} topSlot={<Announcement {...props} />} />
 }
 
