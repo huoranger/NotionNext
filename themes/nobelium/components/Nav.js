@@ -53,13 +53,13 @@ const Nav = props => {
         ref={navRef}>
         <div className='flex items-center'>
           <Link href='/' aria-label={siteConfig('TITLE')}>
-            <div className='h-6 w-6'>
+            <div className='h-8 w-8'>
               {/* <SvgIcon/> */}
               {siteConfig('NOBELIUM_NAV_NOTION_ICON') ? (
                 <LazyImage
                   src={siteInfo?.icon}
-                  width={24}
-                  height={24}
+                  width={36}
+                  height={36}
                   alt={siteConfig('AUTHOR')}
                 />
               ) : (
@@ -72,7 +72,7 @@ const Nav = props => {
               {post?.title}
             </p>
           ) : (
-            <p className='logo line-clamp-1 overflow-ellipsis ml-2 font-medium text-gray-800 dark:text-gray-300 header-name whitespace-nowrap'>
+            <p className='logo line-clamp-1 overflow-ellipsis ml-2 font-medium text-gray-800 dark:text-gray-300 header-name whitespace-nowrap text-2xl'>
               {siteConfig('TITLE')}
               {/* ,{' '}<span className="font-normal">{siteConfig('DESCRIPTION')}</span> */}
             </p>
