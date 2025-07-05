@@ -4,80 +4,139 @@ import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import Link from 'next/link'
 import LazyImage from '@/components/LazyImage'
+import { BlogPostCardInfo } from './BlogPostCardInfo'
+import CONFIG from '../config'
 
-const BlogPost = ({ post }) => {
-  const showPageCover = true
+const BlogPost = ({ post, index,showSummary }) => {
+  const showPreview =
+  siteConfig('HEXO_POST_LIST_PREVIEW', null, CONFIG) && post.blockMap
+if (
+  post &&
+  !post.pageCoverThumbnail &&
+  siteConfig('HEXO_POST_LIST_COVER_DEFAULT', null, CONFIG)
+) {
+  post.pageCoverThumbnail = siteInfo?.pageCover
+}
+const showPageCover =
+  siteConfig('HEXO_POST_LIST_COVER', null, CONFIG) &&
+  post?.pageCoverThumbnail &&
+  !showPreview
+//   const delay = (index % 2) * 200
 
 return (
-  <article
-    className={`${showPageCover ? 'flex md:flex-row flex-col-reverse' : ''} replace mb-12 order-b  gap-4  items-stretch pb-[2.5rem]ß`}>
-          {/* 图片封面 */}
-    {showPageCover && (
-      <div className='md:w-[28%]  overflow-hidden p-1'>
-        <Link href={post?.href} passHref legacyBehavior>
-          <LazyImage
-            src={post?.pageCoverThumbnail}
-            className='w-full h-full object-cover hover:scale-110 duration-200 object-center rounded-sm'
-          />
-        </Link>
-      </div>
-    )}
-    <div className={`${showPageCover ? 'md:w-[70%] w-full' : ''}`}>
-      <h2 className='mb-4'>
-        <Link
-          href={post?.href}
-          className='text-black dark:text-gray-100 text-xl md:text-2xl no-underline hover:underline hover:text-[#f12349] transition-all duration-[300ms] ease-in-out'>
-          {siteConfig('POST_TITLE_ICON') && (
-            <NotionIcon icon={post.pageIcon} />
-          )}
-          {post?.title}
-        </Link>
-      </h2>
+  <div
+    className={`${siteConfig('HEXO_POST_LIST_COVER_HOVER_ENLARGE', null, CONFIG) ? ' hover:scale-110 transition-all duration-150' : ''}`}>
+    <div
+      key={post.id}
+      data-aos='fade-up'
+      data-aos-easing='ease-in-out'
+      data-aos-duration='500'
+      data-aos-once='false'
+      data-aos-anchor-placement='top-bottom'
+      id='blog-post-card'
+      className={`group md:h-56 w-full flex justify-between md:flex-row flex-col-reverse ${siteConfig('HEXO_POST_LIST_IMG_CROSSOVER', null, CONFIG) && index % 2 === 1 ? 'md:flex-row-reverse' : ''}
+                  overflow-hidden border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray`}>
+      {/* 文字内容 */}
+      <BlogPostCardInfo
+        index={index}
+        post={post}
+        showPageCover={showPageCover}
+        showPreview={showPreview}
+        showSummary={showSummary}
+      />
 
-      <div className='mb-4 text-sm text-gray-700 dark:text-gray-300'>
-        by{' '}
-        <a href='#' className='text-gray-700 dark:text-gray-300'>
-          {siteConfig('AUTHOR')}
-        </a>{' '}
-        on {post.date?.start_date || post.createdTime}
-        {post.category && (
-          <>
-            <span className='font-bold mx-1'> | </span>
-            <Link
-              href={`/category/${post.category}`}
-              className='text-gray-700 dark:text-gray-300 hover:underline'>
-              {post.category}
-            </Link>
-          </>
-        )}
-        {/* <span className="font-bold mx-1"> | </span> */}
-        {/* <a href="#" className="text-gray-700">2 Comments</a> */}
-      </div>
-
-      {!post.results && (
-        <p className='line-clamp-3 text-gray-700 dark:text-gray-400 leading-normal'>
-          {post.summary}
-        </p>
-      )}
-      {/* read more */}
-      <Link
-          href={post?.href}
-          className='text-[14px] hover:text-[#f12349] transition-all duration-[300ms] ease-in-out read-more'>
-        Read more
-        <span className='iconfont icon-right'></span>
-        </Link>
-      {/* 搜索结果 */}
-      {post.results && (
-        <p className='line-clamp-3 mt-4 text-gray-700 dark:text-gray-300 text-sm font-light leading-7'>
-          {post.results.map((r, index) => (
-            <span key={index}>{r}</span>
-          ))}
-        </p>
+      {/* 图片封面 */}
+      {showPageCover && (
+        <div className='md:w-5/12 overflow-hidden'>
+          <Link href={post?.href}>
+            <>
+              <LazyImage
+                priority={index === 1}
+                alt={post?.title}
+                src={post?.pageCoverThumbnail}
+                className='h-56 w-full object-cover object-center group-hover:scale-110 duration-500'
+              />
+            </>
+          </Link>
+        </div>
       )}
     </div>
-
-  </article>
+  </div>
 )
+
+
+// const showPageCover = true
+// console.log(type)
+// return (
+//   <article
+//     className={`${showPageCover ? 'flex md:flex-row flex-col-reverse' : ''} replace mb-12 order-b  gap-4  items-stretch pb-[2.5rem]ß`}>
+//           {/* 图片封面 */}
+//     {type == 'left' && showPageCover && (
+//       <div className='md:w-[28%]  overflow-hidden p-1'>
+//         <Link href={post?.href} passHref legacyBehavior>
+//           <LazyImage
+//             src={post?.pageCoverThumbnail}
+//             className='w-full h-full object-cover hover:scale-110 duration-200 object-center rounded-sm'
+//           />
+//         </Link>
+//       </div>
+//     )}
+//     <div className={`${showPageCover ? 'w-full' : ''}`}>
+//       <h2 className='mb-4'>
+//         <Link
+//           href={post?.href}
+//           className='text-black dark:text-gray-100 text-xl md:text-2xl no-underline hover:underline hover:text-[#f12349] transition-all duration-[300ms] ease-in-out'>
+//           {siteConfig('POST_TITLE_ICON') && (
+//             <NotionIcon icon={post.pageIcon} />
+//           )}
+//           {post?.title}
+//         </Link>
+//       </h2>
+
+//       <div className='mb-4 text-sm text-gray-700 dark:text-gray-300'>
+//         by{' '}
+//         <a href='#' className='text-gray-700 dark:text-gray-300'>
+//           {siteConfig('AUTHOR')}
+//         </a>{' '}
+//         on {post.date?.start_date || post.createdTime}
+//         {post.category && (
+//           <>
+//             <span className='font-bold mx-1'> | </span>
+//             <Link
+//               href={`/category/${post.category}`}
+//               className='text-gray-700 dark:text-gray-300 hover:underline'>
+//               {post.category}
+//             </Link>
+//           </>
+//         )}
+//         {/* <span className="font-bold mx-1"> | </span> */}
+//         {/* <a href="#" className="text-gray-700">2 Comments</a> */}
+//       </div>
+
+//       {!post.results && (
+//         <p className='line-clamp-3 text-gray-700 dark:text-gray-400 leading-normal'>
+//           {post.summary}
+//         </p>
+//       )}
+//       {/* read more */}
+//       <Link
+//           href={post?.href}
+//           className='text-[14px] hover:text-[#f12349] transition-all duration-[300ms] ease-in-out read-more'>
+//         Read more
+//         <span className='iconfont icon-right'></span>
+//         </Link>
+//       {/* 搜索结果 */}
+//       {post.results && (
+//         <p className='line-clamp-3 mt-4 text-gray-700 dark:text-gray-300 text-sm font-light leading-7'>
+//           {post.results.map((r, index) => (
+//             <span key={index}>{r}</span>
+//           ))}
+//         </p>
+//       )}
+//     </div>
+
+//   </article>
+// )
 
 
 //   const { NOTION_CONFIG } = useGlobal()

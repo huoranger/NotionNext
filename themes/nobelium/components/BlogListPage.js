@@ -3,6 +3,7 @@ import { useGlobal } from '@/lib/global'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import BlogPost from './BlogPost'
+import PaginationNumber from './PaginationNumber'
 
 export const BlogListPage = props => {
   const { page = 1, posts, postCount } = props
@@ -24,12 +25,12 @@ export const BlogListPage = props => {
   return (
     <div className='w-full my-6'>
       <div id='posts-wrapper'>
-        {posts?.map(post => (
-          <BlogPost key={post.id} post={post} />
+        {posts?.map((index, post) => (
+          <BlogPost key={post.id} post={post} index={index}/>
         ))}
       </div>
 
-      <div className='flex justify-between text-xs'>
+      {/* <div className='flex justify-between text-xs'>
         <Link
           href={{
             pathname:
@@ -53,7 +54,11 @@ export const BlogListPage = props => {
             {locale.PAGINATION.NEXT} →
           </button>
         </Link>
-      </div>
+      </div> */}
+      {/* 分页 */}
+        {(
+          <PaginationNumber page={page} totalPage={totalPage} />
+        )}
     </div>
   )
 }
