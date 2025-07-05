@@ -24,14 +24,14 @@ export const BlogPostCardInfo = ({
         <header>
           <h2>
             {/* 标题 */}
-            <Link
+            {/* <Link
               href={post?.href}
               passHref
               className={`line-clamp-2 replace cursor-pointer text-2xl ${
                 showPreview ? 'text-center' : ''
               } leading-tight font-normal text-gray-600 dark:text-gray-100 hover:text-indigo-700 dark:hover:text-indigo-400`}>
               <span className='menu-link '>{post.title}</span>
-            </Link>
+            </Link> */}
           </h2>
 
           {/* 分类 */}
