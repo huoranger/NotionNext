@@ -51,7 +51,6 @@ const LayoutBase = props => {
   const [filterKey, setFilterKey] = useState('')
   const topSlot = <BlogListBar {...props} />
 
-  console.log(props)
   return (
     <ThemeGlobalNobelium.Provider
       value={{ searchModal, filterKey, setFilterKey }}>

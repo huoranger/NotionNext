@@ -147,7 +147,6 @@ const NavBar = props => {
   }
 
   const router = useRouter();
-  console.log(router.asPath)
   return (
     <div className='flex-shrink-0 flex menus'>
       <ul className='hidden md:flex flex-row'>
