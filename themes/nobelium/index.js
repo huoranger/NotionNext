@@ -51,6 +51,7 @@ const LayoutBase = props => {
   const [filterKey, setFilterKey] = useState('')
   const topSlot = <BlogListBar {...props} />
 
+  console.log(props)
   return (
     <ThemeGlobalNobelium.Provider
       value={{ searchModal, filterKey, setFilterKey }}>
@@ -65,7 +66,7 @@ const LayoutBase = props => {
         {/* 主区 */}
         <main
           id='out-wrapper'
-          className={`relative m-auto flex-grow w-full transition-all ${!fullWidth ? 'max-w-2xl px-4' : 'px-4 md:px-24'}`}>
+          className={`relative m-auto flex-grow w-full transition-all ${!fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'}`}>
           <Transition
             show={!onLoading}
             appear={true}
@@ -115,7 +116,7 @@ const LayoutIndex = props => {
     'HOME_POETRY_LIST',
   )
   return (
-    <div class='poetry text-base w-auto max-w-[26em] mx-auto p-[5em_1em] text-center'>
+    <div className='poetry text-base w-auto max-w-[26em] mx-auto p-[5em_1em] text-center'>
         {HomePoetryList?.map((poe, index) => (
             <p key={index}>{poe}</p>
         ))}

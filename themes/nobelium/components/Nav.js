@@ -11,6 +11,7 @@ import { MenuItemDrop } from './MenuItemDrop'
 import RandomPostButton from './RandomPostButton'
 import SearchButton from './SearchButton'
 import { SvgIcon } from './SvgIcon'
+import { useRouter } from 'next/router'
 /**
  * 顶部导航
  */
@@ -24,30 +25,35 @@ const Nav = props => {
 
   const navRef = useRef(null)
   const sentinalRef = useRef([])
-  const handler = ([entry]) => {
-    if (navRef && navRef.current && autoCollapseNavBar) {
-      if (!entry?.isIntersecting) {
-        navRef.current?.classList.add('sticky-nav-full')
-      } else {
-        navRef.current?.classList.remove('sticky-nav-full')
-      }
-    } else {
-      navRef.current?.classList.add('remove-sticky')
-    }
-  }
-  useEffect(() => {
-    const obvserver = new window.IntersectionObserver(handler)
-    obvserver.observe(sentinalRef.current)
-    return () => {
-      if (sentinalRef.current) obvserver.unobserve(sentinalRef.current)
-    }
-  }, [sentinalRef])
+
+  const router = useRouter();
+  // 是否是首页
+  const isHome = router.asPath == '' || router.asPath == '/'
+
+  // const handler = ([entry]) => {
+  //   if (navRef && navRef.current && autoCollapseNavBar) {
+  //     if (!entry?.isIntersecting) {
+  //       navRef.current?.classList.add('sticky-nav-full')
+  //     } else {
+  //       navRef.current?.classList.remove('sticky-nav-full')
+  //     }
+  //   } else {
+  //     navRef.current?.classList.add('remove-sticky')
+  //   }
+  // }
+  // useEffect(() => {
+  //   const obvserver = new window.IntersectionObserver(handler)
+  //   obvserver.observe(sentinalRef.current)
+  //   return () => {
+  //     if (sentinalRef.current) obvserver.unobserve(sentinalRef.current)
+  //   }
+  // }, [sentinalRef])
   return (
     <>
-      <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div>
+      {/* <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div> */}
       <div
-        className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
-          !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
+        className={`pr-[32%] pl-[32%] sticky-nav sticky-nav-full m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
+          !fullWidth ? 'max-w-4xl px-4' : 'px-4 md:px-24'
         }`}
         id='sticky-nav'
         ref={navRef}>
@@ -140,11 +146,13 @@ const NavBar = props => {
     return null
   }
 
+  const router = useRouter();
+  console.log(router.asPath)
   return (
     <div className='flex-shrink-0 flex menus'>
       <ul className='hidden md:flex flex-row'>
         {links?.map((link, index) => (
-          <MenuItemDrop key={index} link={link} />
+          <MenuItemDrop key={index} link={link} className={`${router.asPath == link.href ? 'text-red-500' : ''}`} />
         ))}
       </ul>
       <div className='md:hidden'>
@@ -168,7 +176,7 @@ const NavBar = props => {
       </div>
 
       {siteConfig('NOBELIUM_MENU_DARKMODE_BUTTON') && (
-        <DarkModeButton className='text-center p-2.5 hover:bg-black hover:bg-opacity-10 rounded-full' />
+        <DarkModeButton className='text-center p-2 hover:bg-black hover:bg-opacity-10 rounded-full' />
       )}
 
       {siteConfig('NOBELIUM_MENU_RANDOM_POST') && (

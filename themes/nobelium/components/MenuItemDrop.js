@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
-
+import { useRouter } from 'next/router'
 export const MenuItemDrop = ({ link }) => {
   const [show, changeShow] = useState(false)
   //   const show = true
@@ -10,9 +10,9 @@ export const MenuItemDrop = ({ link }) => {
   }
 
   const hasSubMenu = link?.subMenus?.length > 0
-
+  const router = useRouter();
   return (
-    <li className='mx-3 my-2'>
+    <li className={`${router.asPath == link.href ? 'actived text-[black]' : ''} mx-3 my-2 relative`} >
       <div
         className='cursor-pointer '
         onMouseOver={() => changeShow(true)}

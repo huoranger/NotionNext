@@ -10,6 +10,14 @@ const Style = () => {
       font-family: "glyph-correction", "I.MingCP", Amstelvar;
     }
 
+    .iconfont {
+      font-family: "iconfont" !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  }
+
     // logo 名字
     .header-name {
       font-family: 'Lato', sans-serif;
@@ -20,6 +28,30 @@ const Style = () => {
     // 底色
     .dark body{
       background-color: black;
+    }
+    // 阅读更多
+    .read-more {
+    }
+    .icon-right:before {
+        content: "\e63b";
+    }
+
+    // 菜单选中样式
+    li.actived .nav:after, li .nav:hover::after {
+        content: "";
+        position: absolute;
+        background: #f12349;
+        left: 0;
+        right: 0;
+        bottom: -0.5rem;
+        width: 4px;
+        height: 4px;
+        border-radius: 10px;
+        margin: 0 auto;
+        opacity: 1;
+    }
+     li .nav:hover::after{
+        background: #000;
     }
   `}</style>
 }
