@@ -36,11 +36,16 @@ const Style = () => {
         content: "\e63b";
     }
 
+    li .nav:hover::after{
+        background: #000;
+    }
     // 菜单选中样式
+   li.actived .nav:after {
+        background: #f12349;
+   }
     li.actived .nav:after, li .nav:hover::after {
         content: "";
         position: absolute;
-        background: #f12349;
         left: 0;
         right: 0;
         bottom: -0.5rem;
@@ -50,9 +55,7 @@ const Style = () => {
         margin: 0 auto;
         opacity: 1;
     }
-     li .nav:hover::after{
-        background: #000;
-    }
+
   `}</style>
 }
 
