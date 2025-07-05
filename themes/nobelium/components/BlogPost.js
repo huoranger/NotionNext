@@ -10,7 +10,7 @@ const BlogPost = ({ post }) => {
 
 return (
   <article
-    className={`${showPageCover ? 'flex md:flex-row flex-col-reverse' : ''} replace mb-12 order-b  gap-4  items-stretch pb-[1rem] border-b border-dotted border-gray-300 dark:border-gray-600`}>
+    className={`${showPageCover ? 'flex md:flex-row flex-col-reverse' : ''} replace mb-12 order-b  gap-4  items-stretch pb-[2.5rem]ß`}>
           {/* 图片封面 */}
     {showPageCover && (
       <div className='md:w-[28%]  overflow-hidden p-1'>
