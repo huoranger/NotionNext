@@ -10,7 +10,7 @@ const Style = () => {
       --theme-color: #f12349;
     }
     body {
-      font-family: "glyph-correction", "I.MingCP", Amstelvar;
+      font-family: "Misans","glyph-correction", "I.MingCP", Amstelvar;
     }
 
     .iconfont {
@@ -59,15 +59,14 @@ const Style = () => {
         opacity: 1;
     }
     .post-title .menu-link:hover {
-      background-size: 100% 2px;
       color: var(--theme-color);
-      background-size: 100% 2px;
+      background-size: 100% 3px;
     }
   .post-title .menu-link{
         background-image: linear-gradient(var(--theme-color), var(--theme-color));
         background-repeat: no-repeat;
         background-position: bottom center;
-        background-size: 0 2px;
+        background-size: 0 3px;
         transition: background-size 100ms ease-in-out;
     }
         .pagination {
@@ -106,6 +105,30 @@ background-color: rgb(255, 55, 74);
       padding-left: 2em;
       position: absolute;
   }
+      .cover-inner {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 120px 40px 40px;
+        background-color: #0000006b;
+        transition: background-color .2s ease;
+      }
+              .cover-image {
+position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #00000008;
+      }
+      .post-cover {
+              position: relative;
+          background-color: #0000006b;
+    transition: background-color .2s ease;}
+
+      .cover-inner:hover {
+      background-color: #000000ad;}
   `}</style>
 }
 

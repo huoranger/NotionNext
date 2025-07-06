@@ -22,23 +22,43 @@ const showPageCover = true
 console.log(post)
 return (
   <div
-    className={`${siteConfig('HEXO_POST_LIST_COVER_HOVER_ENLARGE', null, CONFIG) ? ' hover:scale-110 transition-all duration-150' : ''}`}>
+    className={`${siteConfig('HEXO_POST_LIST_COVER_HOVER_ENLARGE', null, CONFIG) ? ' hover:scale-110 transition-all duration-150' : ''} mb-[3rem]`}>
       {/* 大图片封面 */}
       {post?.cover == 'big' && showPageCover && (
-        <div className='md:w-full overflow-hidden'>
-          <Link href={post?.href}>
+        <div className='md:w-full overflow-hidden post-cover'>
+          <Link href={post?.href} className='cover-image'>
             <>
               <LazyImage
                 priority={index === 1}
                 alt={post?.title}
                 src={post?.pageCoverThumbnail}
-                className='h-60 w-full object-cover object-center group-hover:scale-110 duration-500'
+                className='h-full w-full object-cover object-center group-hover:scale-110 duration-500 '
               />
             </>
           </Link>
+            <div className='cover-inner text-[#fff]'>
+            <h2 className='my-[1rem]'>
+              {/* 标题 */}
+              <Link
+                href={post?.href}
+                passHref
+                className={`post-title line-clamp-2 replace cursor-pointer text-3xl ${
+                  showPreview ? 'text-center' : ''
+                } leading-tight font-normal dark:text-gray-100`}>
+                <span className='menu-link '>{post.title}</span>
+              </Link>
+            </h2>
+              {/* 摘要 */}
+            {!post.results && (
+              <h4 className='line-clamp-2 replace my-3 dark:text-gray-300ßß font-light leading-7'>
+                {post.summary}
+              </h4>
+            )}
+            </div>
         </div>
       )}
-    <div
+      {(!post?.cover || post?.cover != 'big') && (
+<div
       key={post.id}
       data-aos='fade-up'
       data-aos-easing='ease-in-out'
@@ -59,7 +79,7 @@ return (
 
       {/* 图片封面 */}
       {post?.cover != 'big' && showPageCover && (
-        <div className='md:w-4/12 overflow-hidden'>
+        <div className='md:w-4/12 overflow-hidden post-cover'>
           <Link href={post?.href}>
             <>
               <LazyImage
@@ -73,6 +93,8 @@ return (
         </div>
       )}
     </div>
+      )}
+    
   </div>
 )
 
