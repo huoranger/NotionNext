@@ -51,12 +51,13 @@ const Nav = props => {
   return (
     <>
       {/* <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div> */}
-      <div
-        className={`pr-[32%] pl-[32%] sticky-nav sticky-nav-full m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
+              <div
+        className={`sticky-nav sticky-nav-full  w-full  bg-opacity-60  mb-2 md:mb-12 ${
           !fullWidth ? 'max-w-4xl px-4' : 'px-4 md:px-24'
         }`}
         id='sticky-nav'
         ref={navRef}>
+          <div className='flex justify-between items-center mx-auto  m-auto max-w-[60rem]  py-8 h-6'>
         <div className='flex items-center'>
           <Link href='/' aria-label={siteConfig('TITLE')} className='flex items-center'>
             <div className='h-8 w-8'>
@@ -72,21 +73,18 @@ const Nav = props => {
                 <SvgIcon />
               )}
             </div>
-            {post ? (
-            <p className='ml-2 max-h-12 line-clamp-2 overflow-ellipsis font-medium text-gray-800 dark:text-gray-300 header-name'>
-              {post?.title}
-            </p>
-          ) : (
             <p className='logo line-clamp-1 overflow-ellipsis ml-2 font-medium text-gray-800 dark:text-gray-300 header-name whitespace-nowrap text-2xl'>
               {siteConfig('TITLE')}
               {/* ,{' '}<span className="font-normal">{siteConfig('DESCRIPTION')}</span> */}
             </p>
-          )}
           </Link>
           
         </div>
         <NavBar {...props} />
+          </div>
+
       </div>
+
     </>
   )
 }

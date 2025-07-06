@@ -4,6 +4,7 @@ import TagItem from './TagItem'
 import md5 from 'js-md5'
 import { siteConfig } from '@/lib/config'
 import NotionIcon from '@/components/NotionIcon'
+import Link from 'next/link'
 
 export const ArticleInfo = (props) => {
   const { post } = props
@@ -19,7 +20,7 @@ export const ArticleInfo = (props) => {
 
             {post?.type !== 'Page' && <>
                 <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400">
-                    <div className="flex mb-4">
+                    {/* <div className="flex mb-4">
                         <a href={siteConfig('CONTACT_GITHUB', '#')} className="flex">
                             <Image
                                 alt={siteConfig('AUTHOR')}
@@ -31,21 +32,24 @@ export const ArticleInfo = (props) => {
                             <p className="ml-2 md:block">{siteConfig('AUTHOR')}</p>
                         </a>
                         <span className="block">&nbsp;/&nbsp;</span>
-                    </div>
+                    </div> */}
+                    {post?.category && (
+                        <div className="flex flex-nowrap max-w-full overflow-x-auto article-tags">
+                            <Link href={`/category/${post?.category}`}>
+                            {post?.category}
+                            </Link>
+                            <span className="block">&nbsp;/&nbsp;</span>
+                        </div>
+                    )}
                     <div className="mr-2 mb-4 md:ml-0">
                         {post?.publishDay}
                     </div>
-                    {post?.tags && (
-                        <div className="flex flex-nowrap max-w-full overflow-x-auto article-tags">
-                            {post?.tags.map(tag => (
-                                <TagItem key={tag} tag={tag} />
-                            ))}
-                        </div>
-                    )}
+                    
                     <span className="hidden busuanzi_container_page_pv mr-2">
-                        <i className='mr-1 fas fa-eye' />
+                        {/* <i className='mr-1 fas fa-eye' /> */}
                         &nbsp;
                         <span className="mr-2 busuanzi_value_page_pv" />
+                        阅
                     </span>
                 </nav>
             </>}

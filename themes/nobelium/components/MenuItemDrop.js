@@ -12,7 +12,7 @@ export const MenuItemDrop = ({ link }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter();
   return (
-    <li className={`${router.asPath == link.href ? 'actived text-[black]' : ''} mx-3 my-2 relative`} >
+    <li className={`${router.asPath.includes(link.href) ? 'actived text-[black]' : ''} mx-3 my-2 relative`} >
       <div
         className='cursor-pointer '
         onMouseOver={() => changeShow(true)}

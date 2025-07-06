@@ -20,7 +20,7 @@ const PaginationNumber = ({ page, totalPage }) => {
   const pages = generatePages(pagePrefix, page, currentPage, totalPage)
 
   return (
-    <div className='mt-10 mb-5 flex justify-center items-end font-medium text-indigo-400 duration-500 py-3 space-x-2'>
+    <div className='pagination mt-10 mb-5 flex justify-center items-end font-medium duration-500 py-3 space-x-2'>
       {/* 上一页 */}
       <Link
         href={{
@@ -31,7 +31,7 @@ const PaginationNumber = ({ page, totalPage }) => {
           query: router.query.s ? { s: router.query.s } : {}
         }}
         rel='prev'
-        className={`${currentPage === 1 ? 'invisible' : 'block'} pb-0.5 hover:bg-indigo-400 hover:text-white w-6 text-center cursor-pointer duration-200 hover:font-bold`}>
+        className={`${currentPage === 1 ? 'invisible' : 'block'} pb-0.5 w-6 text-center cursor-pointer duration-200 pagination-prev`}>
         <i className='fas fa-angle-left' />
       </Link>
 
@@ -44,7 +44,7 @@ const PaginationNumber = ({ page, totalPage }) => {
           query: router.query.s ? { s: router.query.s } : {}
         }}
         rel='next'
-        className={`${+showNext ? 'block' : 'invisible'} pb-0.5 hover:bg-indigo-400 hover:text-white w-6 text-center cursor-pointer duration-200 hover:font-bold`}>
+        className={`${+showNext ? 'block' : 'invisible'} pb-0.5 w-6 text-center cursor-pointer duration-200 pagination-next`}>
         <i className='fas fa-angle-right' />
       </Link>
     </div>
@@ -65,13 +65,10 @@ function getPageElement(page, currentPage, pagePrefix) {
       href={page === 1 ? `${pagePrefix}/` : `${pagePrefix}/page/${page}`}
       key={page}
       passHref
-      className={`${
-        selected
-          ? 'font-bold bg-indigo-400 hover:bg-indigo-600 dark:bg-indigo-500 text-white'
-          : 'border-b border-indigo-400 text-indigo-400 hover:border-indigo-400 hover:bg-indigo-400'
-      }
-      duration-500  hover:font-bold hover:text-white
+      className={`${selected?'actived':''}
+      duration-500  hover:font-bold
       cursor-pointer pb-0.5 w-6 text-center
+      pagination-number
       `}>
       {page}
     </Link>

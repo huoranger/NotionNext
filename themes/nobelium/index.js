@@ -50,7 +50,24 @@ const LayoutBase = props => {
   // 在列表中进行实时过滤
   const [filterKey, setFilterKey] = useState('')
   const topSlot = <BlogListBar {...props} />
+  const router = useRouter()
+  const [safeRouter, setSafeRouter] = useState({
+    isReady: false,
+    asPath: '',
+    pathname: ''
+  });
 
+  // 获取一级路劲，添加到classList
+  useEffect(() => {
+    if (router.isReady) {
+      setSafeRouter({
+        isReady: true,
+        asPath: router.asPath,
+        pathname: router.pathname
+      });
+    }
+  }, [router.isReady, router.asPath, router.pathname]);
+  const firstLevelPath = safeRouter.asPath.split('/')[1] || '/';
   return (
     <ThemeGlobalNobelium.Provider
       value={{ searchModal, filterKey, setFilterKey }}>
@@ -65,7 +82,7 @@ const LayoutBase = props => {
         {/* 主区 */}
         <main
           id='out-wrapper'
-          className={`relative m-auto flex-grow w-full transition-all ${!fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'}`}>
+          className={`${firstLevelPath} relative m-auto flex-grow w-full transition-all ${!fullWidth ? 'max-w-[50rem] px-4' : 'px-4 md:px-24'}`}>
           <Transition
             show={!onLoading}
             appear={true}
@@ -269,7 +286,7 @@ const LayoutSlug = props => {
             </div>
             <ShareBar post={post} />
             <Comment frontMatter={post} />
-            <ArticleFooter />
+            {/* <ArticleFooter /> */}
           </>
         </div>
       )}

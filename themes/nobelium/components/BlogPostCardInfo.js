@@ -19,7 +19,7 @@ export const BlogPostCardInfo = ({
 }) => {
   return (
     <article
-      className={`flex flex-col justify-between lg:p-6 p-4  ${showPageCover && !showPreview ? 'md:w-7/12 w-full md:max-h-60' : 'w-full'}`}>
+      className={`flex flex-col justify-between lg:p-6 p-4  ${!post?.cover && showPageCover && !showPreview ? 'md:w-8/12 w-full md:max-h-60' : 'w-full'}`}>
       <div>
         <header>
           <h2>
@@ -27,9 +27,9 @@ export const BlogPostCardInfo = ({
             <Link
               href={post?.href}
               passHref
-              className={`line-clamp-2 replace cursor-pointer text-2xl ${
+              className={`post-title line-clamp-2 replace cursor-pointer text-2xl ${
                 showPreview ? 'text-center' : ''
-              } leading-tight font-normal text-gray-600 dark:text-gray-100 hover:text-indigo-700 dark:hover:text-indigo-400`}>
+              } leading-tight font-normal text-gray-600 dark:text-gray-100`}>
               <span className='menu-link '>{post.title}</span>
             </Link>
           </h2>
@@ -40,13 +40,13 @@ export const BlogPostCardInfo = ({
               className={`flex mt-2 items-center ${
                 showPreview ? 'justify-center' : 'justify-start'
               } flex-wrap dark:text-gray-500 text-gray-400 `}>
-              <Link
+              {/* <Link
                 href={`/category/${post.category}`}
                 passHref
                 className='cursor-pointer font-light text-sm menu-link hover:text-indigo-700 dark:hover:text-indigo-400 transform'>
                 <i className='mr-1 far fa-folder' />
                 {post.category}
-              </Link>
+              </Link> */}
 
               <TwikooCommentCount
                 className='text-sm hover:text-indigo-700 dark:hover:text-indigo-400'
