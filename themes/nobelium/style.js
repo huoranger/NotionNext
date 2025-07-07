@@ -101,8 +101,8 @@ background-color: rgb(255, 55, 74);
     }
     hr.notion-hr::after {
       content: "···";
-      letter-spacing: 2em;
-      padding-left: 2em;
+      letter-spacing: 2rem;
+      padding-left: -3rem;
       position: absolute;
   }
       .cover-inner {

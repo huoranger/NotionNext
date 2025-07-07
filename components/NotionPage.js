@@ -226,13 +226,22 @@ function getMediumZoomMargin() {
 }
 
 // 代码
-const Code = dynamic(
-  () =>
-    import('react-notion-x/build/third-party/code').then(m => {
-      return m.Code
-    }),
-  { ssr: false }
-)
+const Code = ({block}) => {
+  const content = block?.properties?.title?.[0][0]
+  if (content.startsWith("<!--render-->")) {
+    return <div dangerouslySetInnerHTML={{ __html: content }} />
+  }
+  return dynamic(
+    () =>
+      import('react-notion-x/build/third-party/code').then(m => {
+        return m.Code
+      }),
+    { ssr: false }
+  )
+}
+
+
+
 
 // 公式
 const Equation = dynamic(
