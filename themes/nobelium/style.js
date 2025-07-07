@@ -108,7 +108,7 @@ background-color: rgb(255, 55, 74);
 }
     hr.notion-hr {
             border: none;
-      margin: 1em 0 1.5em;
+      margin: 1rem 0 4rem;
       text-align: center;
       border-top:unset !important;
     }
