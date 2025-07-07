@@ -8,9 +8,22 @@ const Style = () => {
   return <style jsx global>{`
     :root {
       --theme-color: #f12349;
+      --fg-color: hsl(240, 4%, 20%);
     }
     body {
-      font-family: "Misans","glyph-correction", "I.MingCP", Amstelvar;
+      font-family: "glyph-correction", "I.MingCP", Amstelvar, "Misans";
+      color: var(--color-contrast-high)
+    }
+      .inner-html {
+      width: 100%;
+      }
+      #notion-article p {
+          margin: 1em 0;
+        line-height: 2;
+      }
+    h2 {
+      font-size: 1.8em;
+      margin: 1.618em 0 1em;
     }
 
     .iconfont {
@@ -95,14 +108,14 @@ background-color: rgb(255, 55, 74);
 }
     hr.notion-hr {
             border: none;
-      margin: 2.427em 0 1.5em;
+      margin: 1em 0 1.5em;
       text-align: center;
       border-top:unset !important;
     }
     hr.notion-hr::after {
       content: "···";
       letter-spacing: 2rem;
-      padding-left: -3rem;
+      margin-left: -2.75rem;
       position: absolute;
   }
       .cover-inner {
