@@ -21,7 +21,7 @@ const Style = () => {
           margin: 1em 0;
         line-height: 2;
       }
-    h2 {
+    #notion-article h2 {
       font-size: 1.8em;
       margin: 1.618em 0 1em;
     }

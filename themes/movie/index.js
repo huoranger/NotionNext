@@ -198,7 +198,7 @@ const LayoutSlug = props => {
         const figCaptionValue = figCaption
           ? figCaption?.textContent?.trim()
           : `P-${index}`
-        figCaptionValues.push(figCaptionValue)
+        figCaptionValues.push(index == 0?`◎ ${figCaptionValue}`: figCaptionValue)
 
         // 创建一个新的 div 元素用于包裹当前的 .notion-asset-wrapper 元素
         const carouselItem = document.createElement('div')
