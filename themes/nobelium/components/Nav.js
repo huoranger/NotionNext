@@ -22,6 +22,11 @@ const Nav = props => {
     true,
     CONFIG
   )
+  const enableColorfulNav = siteConfig(
+    'COLORFUL_NAV',
+    true,
+    CONFIG
+  )
 
   const navRef = useRef(null)
   const sentinalRef = useRef([])
@@ -54,7 +59,7 @@ const Nav = props => {
               <div
         className={`sticky-nav sticky-nav-full  w-full  bg-opacity-60  mb-2 md:mb-12 ${
           !fullWidth ? 'max-w-4xl px-4' : 'px-4 md:px-24'
-        }`}
+        } ${enableColorfulNav? 'nav-colorful border-none' : ''}`}
         id='sticky-nav'
         ref={navRef}>
           <div className='flex justify-between items-center mx-auto  m-auto max-w-[60rem]  py-8 h-6'>

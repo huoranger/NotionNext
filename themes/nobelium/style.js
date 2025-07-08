@@ -6,14 +6,31 @@
  */
 const Style = () => {
   return <style jsx global>{`
-    :root {
+    :root[className="light"]  {
       --theme-color: #f12349;
       --fg-color: hsl(240, 4%, 20%);
     }
+    :root[className="dark"]  {
+      --theme-color: #f12349;
+      --fg-color: hsl(69, 9%, 84%);
+      --color-bg: hsl(231, 14%, 10%);
+    }
+
+    // 滚动条
+    ::-webkit-scrollbar-thumb {
+      background-color: #a8a8a8;
+      background-clip: padding-box ！important;
+      border: 3px solid transparent !important;
+      border-radius: 5px;
+  }
+
     body {
       font-family: "glyph-correction", "I.MingCP", Amstelvar, "Misans";
       color: var(--fg-color)
     }
+        .dark body {
+      background-color: var(--color-bg);
+  }
       .inner-html {
       width: 100%;
       }
@@ -50,6 +67,13 @@ const Style = () => {
     }
     .icon-right:before {
         content: "\e63b";
+    }
+
+    // nav 多彩色
+    #sticky-nav.nav-colorful {
+      background: linear-gradient(90deg, rgba(247, 149, 51, 0.101961) 0, rgba(243, 112, 85, 0.101961) 15%, rgba(239, 78, 123, 0.101961) 30%, rgba(161, 102, 171, 0.101961) 44%, rgba(80, 115, 184, 0.101961) 58%, rgba(16, 152, 173, 0.101961) 72%, rgba(7, 179, 155, 0.101961) 86%, rgba(109, 186, 130, 0.101961) 100%);
+      backdrop-filter: saturate(180%) blur(1em);
+      transition: background .5s;
     }
 
     li .nav:hover::after{
@@ -142,6 +166,14 @@ position: absolute;
 
       .cover-inner:hover {
       background-color: #0000005b;}
+
+      // 代码块
+      .notion-code {
+        font-family: "glyph-correction", "Source Code Pro", "I.MingCP", monospace;
+      }
+      .code-toolbar {
+        --tw-shadow: unset;
+      }
   `}</style>
 }
 
