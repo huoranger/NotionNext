@@ -12,14 +12,14 @@ export const ArticleInfo = (props) => {
   const emailHash = md5(siteConfig('CONTACT_EMAIL', '#'))
 
   return <section className="flex-wrap flex mt-2 text-gray--600 dark:text-gray-400 font-light leading-8">
-        <div>
+        <div className='w-full'>
 
-            <h1 className="font-bold text-3xl text-black dark:text-white">
+            <h1 className="font-bold text-3xl text-black dark:text-white text-center">
                 {siteConfig('POST_TITLE_ICON') && <NotionIcon icon={post?.pageIcon} />}{post?.title}
             </h1>
 
             {post?.type !== 'Page' && <>
-                <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400">
+                <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400 text-sm font-semibold justify-center">
                     {/* <div className="flex mb-4">
                         <a href={siteConfig('CONTACT_GITHUB', '#')} className="flex">
                             <Image
@@ -33,17 +33,18 @@ export const ArticleInfo = (props) => {
                         </a>
                         <span className="block">&nbsp;/&nbsp;</span>
                     </div> */}
-                    {post?.category && (
-                        <div className="flex flex-nowrap max-w-full overflow-x-auto article-tags">
-                            <Link href={`/category/${post?.category}`}>
-                            {post?.category}
-                            </Link>
-                            <span className="block">&nbsp;/&nbsp;</span>
-                        </div>
-                    )}
                     <div className="mr-2 mb-4 md:ml-0">
                         {post?.publishDay}
                     </div>
+                    {post?.category && (
+                        <div className="flex flex-nowrap max-w-full overflow-x-auto article-tags text-[#f12349]">
+                            <Link href={`/category/${post?.category}`}>
+                            {post?.category}
+                            </Link>
+                            {/* <span className="block">&nbsp;/&nbsp;</span> */}
+                        </div>
+                    )}
+
                     
                     <span className="hidden busuanzi_container_page_pv mr-2">
                         {/* <i className='mr-1 fas fa-eye' /> */}

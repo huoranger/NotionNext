@@ -19,7 +19,7 @@ const PaginationNumber = ({ page, totalPage }) => {
     .replace('.html', '')
   const pages = generatePages(pagePrefix, page, currentPage, totalPage)
 
-  return (
+  return (totalPage > 1 &&
     <div className='pagination mt-10 mb-5 flex justify-center items-end font-medium duration-500 py-3 space-x-2'>
       {/* 上一页 */}
       <Link

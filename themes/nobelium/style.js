@@ -12,7 +12,7 @@ const Style = () => {
     }
     body {
       font-family: "glyph-correction", "I.MingCP", Amstelvar, "Misans";
-      color: var(--color-contrast-high)
+      color: var(--fg-color)
     }
       .inner-html {
       width: 100%;
@@ -108,7 +108,7 @@ background-color: rgb(255, 55, 74);
 }
     hr.notion-hr {
             border: none;
-      margin: 1rem 0 4rem;
+      margin: 2rem 0 3rem;
       text-align: center;
       border-top:unset !important;
     }
@@ -123,7 +123,7 @@ background-color: rgb(255, 55, 74);
         z-index: 2;
         color: #fff;
         padding: 120px 40px 40px;
-        background-color: #0000006b;
+        background-color: #0000002b;
         transition: background-color .2s ease;
       }
               .cover-image {
@@ -141,7 +141,7 @@ position: absolute;
     transition: background-color .2s ease;}
 
       .cover-inner:hover {
-      background-color: #000000ad;}
+      background-color: #0000005b;}
   `}</style>
 }
 
