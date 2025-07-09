@@ -11,7 +11,7 @@ const CONFIG = {
   NOBELIUM_MENU_TAG: true, // 显示标签
   NOBELIUM_MENU_ARCHIVE: false, // 显示归档
   NOBELIUM_MENU_SEARCH: true, // 显示搜索
-  NOBELIUM_MENU_RSS: false, // 显示订阅
+  NOBELIUM_MENU_RSS: false, // 显示订阅darkModeButton
 
   NOBELIUM_AUTO_COLLAPSE_NAV_BAR: true, // 页头导航栏动画
   HOME_POETRY_LIST: ["暗夜中", "渴望一束光的关怀", "在白天", "却更渴望黑洞的吞噬", "因为好奇心，想看看黑暗中有什么"]

@@ -29,9 +29,9 @@ const Style = () => {
       font-family: "glyph-correction", "I.MingCP", Amstelvar, "Misans";
       color: var(--fg-color)
     }
-        .dark body {
-      background-color: var(--color-bg);
-  }
+    .dark body {
+        color: hsl(69, 9%, 84%);
+    }
       .inner-html {
       width: 100%;
       }
@@ -175,6 +175,13 @@ position: absolute;
       .code-toolbar {
         --tw-shadow: unset;
       }
+
+      ::selection {
+      background-color: hsla(220, 90%, 56%, 0.3);
+  }
+      .dark img {
+          filter: brightness(75%);
+          }
   `}</style>
 }
 
