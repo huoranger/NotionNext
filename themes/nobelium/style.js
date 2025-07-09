@@ -30,7 +30,7 @@ const Style = () => {
       color: var(--fg-color)
     }
     .dark body {
-        color: hsl(69, 9%, 84%);
+        color: hsl(69, 9%, 84%) !important;
     }
       .inner-html {
       width: 100%;
