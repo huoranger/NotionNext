@@ -6,11 +6,12 @@
  */
 const Style = () => {
   return <style jsx global>{`
-    :root[className="light"]  {
+    :root[class*="light"]  {
       --theme-color: #f12349;
       --fg-color: hsl(240, 4%, 20%);
+      --color-bg: hsl(231, 14%, 10%);
     }
-    :root[className="dark"]  {
+    :root[class*="dark"]  {
       --theme-color: #f12349;
       --fg-color: hsl(69, 9%, 84%);
       --color-bg: hsl(231, 14%, 10%);
