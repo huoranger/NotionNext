@@ -205,7 +205,12 @@ position: absolute;
               padding: 2.25px 4.5px;
               font-size: 80%;
               background-color: hsla(0, 0%, 95%);
+              color: var(--fg-color);
           }
+              // 目录
+              .notion-h1, .notion-h2, .notion-h3, .notion-h4{
+                  font-family: "glyph-correction", "Noto Serif TC", "Noto Serif SC", serif;
+              }
 
   `}</style>
 }
