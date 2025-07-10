@@ -281,10 +281,10 @@ const LayoutSlug = props => {
     if (!post) return;
 
     const observer = new MutationObserver((mutations, obs) => {
-      const twikooContainer = document.querySelector('#twikoo .tk-submit')
+      const twikooContainer = document.querySelector('#twikoo')
       if (!twikooContainer) return;
 
-      const avatar = twikooContainer.querySelector('.tk-avatar')
+      const avatar = twikooContainer.querySelector('.tk-submit .tk-avatar')
       const metaInputs = twikooContainer.querySelectorAll('.tk-meta-input div')
       const textarea = twikooContainer.querySelector('textarea')
       const previewBtn = twikooContainer.querySelector('.tk-preview')
