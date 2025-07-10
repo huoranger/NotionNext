@@ -200,6 +200,12 @@ position: absolute;
           filter: brightness(75%);
           }
 
+          // 行内代码的样式
+          .notion-inline-code {
+              padding: 2.25px 4.5px;
+              font-size: 80%;
+              background-color: hsla(0, 0%, 95%);
+          }
 
   `}</style>
 }
