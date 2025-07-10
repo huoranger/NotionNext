@@ -278,134 +278,109 @@ const LayoutSlug = props => {
 
   // 修改评论区样式
   useEffect(() => {
-  if (!post) return;
+    if (!post) return;
 
-  // 使用防抖函数避免频繁执行
-  const debounce = (func, delay) => {
-    let timer;
-    return function() {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, arguments), delay);
-    };
-  };
+    const observer = new MutationObserver((mutations, obs) => {
+      const twikooContainer = document.querySelector('#twikoo')
+      if (!twikooContainer) return;
 
-  const applyTwikooStyles = () => {
-    const twikooContainer = document.querySelector('#twikoo');
-    if (!twikooContainer) return;
+      const avatar = twikooContainer.querySelector('.tk-submit .tk-avatar')
+      const metaInputs = twikooContainer.querySelectorAll('.tk-meta-input div')
+      const textarea = twikooContainer.querySelector('textarea')
+      const previewBtn = twikooContainer.querySelector('.tk-preview')
+      const markdownBtn = twikooContainer.querySelector('.__markdown')
+      const sendBtn = twikooContainer.querySelector('.tk-send')
+      const commentContainer = twikooContainer.querySelector('.tk-comments-container')
+      const actions = twikooContainer.querySelector('.tk-row.actions')
+      
+      
+      // 确保所有需要的元素都存在
+      if (avatar && textarea && markdownBtn && previewBtn && sendBtn && commentContainer && actions && metaInputs.length > 0) {
+        console.log('Twikoo元素已加载，开始修改样式');
+        obs.disconnect(); // 停止观察
 
-    // 使用requestAnimationFrame优化性能
-    requestAnimationFrame(() => {
-      try {
-        // 1. 修改表单区域
-        const avatar = twikooContainer.querySelector('.tk-submit .tk-avatar');
-        if (avatar) avatar.style.display = 'none';
+        // 修改头像样式
+        avatar.style.display = 'none'
 
-        const previewBtn = twikooContainer.querySelector('.tk-preview');
-        if (previewBtn) previewBtn.style.display = 'none';
+        // 修改预览按钮样式
+        previewBtn.style.display = 'none'
+        markdownBtn.style.display = 'none'
 
-        const markdownBtn = twikooContainer.querySelector('.__markdown');
-        if (markdownBtn) markdownBtn.style.display = 'none';
+        // 修改发送按钮样式
+        Object.assign(sendBtn.style, {
+          background: '#F44336',
+          padding: '.5rem 1.5rem',
+          borderRadius: '4px',
+          color: '#fff',
+          fontSize: '14px'
+        })
+        Object.assign(actions.style, {
+          marginLeft: 0;
+        })
+        
 
-        const sendBtn = twikooContainer.querySelector('.tk-send');
-        if (sendBtn) {
-          sendBtn.style.cssText = `
-            background: #F44336;
-            padding: .5rem 1.5rem;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 14px
-          `;
-        }
-
-        const actions = twikooContainer.querySelector('.tk-row.actions');
-        if (actions) actions.style.marginLeft = '0';
-
-        // 2. 修改文本输入框
-        const textarea = twikooContainer.querySelector('textarea');
+        // 修改输入框样式
         if (textarea) {
-          textarea.style.cssText = `
-            outline: none;
-            border: 0;
-            border-radius: 3px;
-            width: 100%;
-            min-height: 140px;
-            height: auto;
-            line-height: 1.5;
-            background-color: #f0f3f8;
-            padding: .375rem .75rem;
-            overflow: auto;
-            resize: none;
-            font-size: 15px
-          `;
+          Object.assign(textarea.style, {
+            outline: 'none',
+            border: 0,
+            borderRadius: '3px',
+            width: '100%',
+            minHeight: '140px',
+            height: 'auto',
+            lineHeight: '1.5',
+            backgroundColor: '#f0f3f8',
+            padding: '.375rem .75rem',
+            overflow: 'auto',
+            resize: 'none',
+            fontSize: '15px'
+          })
         }
 
-        // 3. 修改元数据输入框
-        const metaInputs = twikooContainer.querySelectorAll('.tk-meta-input div');
+        // 修改输入框样式
         metaInputs.forEach(meta => {
-          const name = meta.querySelector('div');
-          const input = meta.querySelector('input');
+          const name = meta.querySelector('div')
+          const input = meta.querySelector('input')
+
+          let tip = ''
 
           if (name) {
-            name.style.display = 'none';
-            if (input) input.placeholder = name.innerText;
+            name.style.display = 'none'
+            tip = name.innerText
           }
           
           if (input) {
-            input.style.cssText = `
-              outline: none;
-              background-color: #f4f6fb;
-              border-radius: 3px;
-              border: 1px solid #f4f6fb;
-              padding: .375rem .75rem;
-              line-height: 1.5;
-              font-size: 14px
-            `;
+            Object.assign(input.style, {
+              outline: 'none',
+              backgroundColor: '#f4f6fb',
+              borderRadius: '3px',
+              border: '1px solid #f4f6fb',
+              padding: '.375rem .75rem',
+              lineHeight: '1.5',
+              fontSize: '14px'
+            })
+            input.placeholder = tip; // 设置占位符为提示文本
           }
-        });
+        })
 
-        // 4. 修改评论列表
-        const commentContainer = twikooContainer.querySelector('.tk-comments-container');
-        if (commentContainer) {
-          const avatarList = commentContainer.querySelectorAll('.tk-avatar');
-          avatarList.forEach(avatar => {
-            avatar.style.borderRadius = '50%';
-          });
-        }
-      } catch (error) {
-        console.error('应用样式出错:', error);
+        // 修改评论区样式
+        const avatarList = commentContainer.querySelectorAll('.tk-avatar')
+        avatarList.forEach(avatar => {
+          Object.assign(avatar.style, {
+            borderRadius: '50%'
+          })
+        })
       }
-    });
-  };
+    })
 
-  // 防抖处理后的样式应用函数
-  const debouncedApplyStyles = debounce(applyTwikooStyles, 100);
-
-  // 立即尝试应用一次
-  debouncedApplyStyles();
-
-  // 创建优化的观察器
-  const observer = new MutationObserver((mutations) => {
-    // 只处理实际变化
-    if (mutations.length > 0) {
-      debouncedApplyStyles();
-    }
-  });
-
-  // 限制观察范围，只观察#twikoo及其子元素
-  const twikooContainer = document.querySelector('#twikoo');
-  if (twikooContainer) {
-    observer.observe(twikooContainer, {
+    // 开始观察文档变化
+    observer.observe(document.body, {
       childList: true,
-      subtree: true,
-      attributes: false, // 不需要观察属性变化
-      characterData: false
-    });
-  }
+      subtree: true
+    })
 
-  return () => {
-    observer.disconnect();
-  };
-}, [post]);
+    return () => observer.disconnect()
+  }, [post])
 
   return (
     <>
