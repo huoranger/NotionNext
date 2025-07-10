@@ -315,7 +315,7 @@ const LayoutSlug = props => {
           fontSize: '14px'
         })
         Object.assign(actions.style, {
-          marginLeft: 0;
+          marginLeft: 0
         })
         
 
