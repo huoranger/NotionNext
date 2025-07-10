@@ -182,6 +182,8 @@ position: absolute;
       .dark img {
           filter: brightness(75%);
           }
+
+
   `}</style>
 }
 

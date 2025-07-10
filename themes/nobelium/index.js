@@ -255,6 +255,8 @@ const LayoutSlug = props => {
   const { post, lock, validPassword } = props
   const router = useRouter()
   const waiting404 = siteConfig('POST_WAITING_TIME_FOR_404') * 1000
+
+  const commentContainerRef = useRef(null);
   useEffect(() => {
     // 404
     if (!post) {
@@ -273,6 +275,65 @@ const LayoutSlug = props => {
       )
     }
   }, [post])
+
+  // 修改评论区样式
+  useEffect(() => {
+    if (!post) return;
+
+    const observer = new MutationObserver((mutations, obs) => {
+      const twikooContainer = document.querySelector('#twikoo');
+      if (!twikooContainer) return;
+
+      const avatar = twikooContainer.querySelector('.tk-avatar');
+      const metaInputs = twikooContainer.querySelectorAll('.tk-meta-input div');
+      
+      // 确保所有需要的元素都存在
+      if (avatar && metaInputs.length > 0) {
+        console.log('Twikoo元素已加载，开始修改样式');
+        obs.disconnect(); // 停止观察
+
+        // 修改头像样式
+        avatar.style.display = 'none'
+
+        // 修改输入框样式
+        metaInputs.forEach(meta => {
+          const name = meta.querySelector('div')
+          const input = meta.querySelector('input')
+
+          let tip = ''
+
+          if (name) {
+            name.style.display = 'none'
+            tip = name.innerText
+          }
+          
+          if (input) {
+            Object.assign(input.style, {
+              outline: 'none',
+              backgroundColor: '#f4f6fb',
+              borderRadius: '3px',
+              border: '1px solid #f4f6fb',
+              padding: '.375rem .75rem',
+              lineHeight: '1.5',
+              fontSize: '14px'
+            })
+            input.placeholder = tip; // 设置占位符为提示文本
+          }
+          
+
+        })
+      }
+    })
+
+    // 开始观察文档变化
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    })
+
+    return () => observer.disconnect()
+  }, [post])
+
   return (
     <>
       {lock && <ArticleLock validPassword={validPassword} />}
@@ -284,8 +345,8 @@ const LayoutSlug = props => {
             <div id='article-wrapper'>
               <NotionPage post={post} />
             </div>
-            <ShareBar post={post} />
-            <Comment frontMatter={post} />
+            <ShareBar post={post}/>
+            <Comment frontMatter={post} ref={commentContainerRef}/>
             {/* <ArticleFooter /> */}
           </>
         </div>
