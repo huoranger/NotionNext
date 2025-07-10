@@ -281,19 +281,55 @@ const LayoutSlug = props => {
     if (!post) return;
 
     const observer = new MutationObserver((mutations, obs) => {
-      const twikooContainer = document.querySelector('#twikoo');
+      const twikooContainer = document.querySelector('#twikoo .tk-submit')
       if (!twikooContainer) return;
 
-      const avatar = twikooContainer.querySelector('.tk-avatar');
-      const metaInputs = twikooContainer.querySelectorAll('.tk-meta-input div');
+      const avatar = twikooContainer.querySelector('.tk-avatar')
+      const metaInputs = twikooContainer.querySelectorAll('.tk-meta-input div')
+      const textarea = twikooContainer.querySelector('textarea')
+      const previewBtn = twikooContainer.querySelector('.tk-preview')
+      const markdownBtn = twikooContainer.querySelector('.__markdown')
+      const sendBtn = twikooContainer.querySelector('.tk-send')
+      const commentContainer = twikooContainer.querySelector('.tk-comments-container')
       
       // 确保所有需要的元素都存在
-      if (avatar && metaInputs.length > 0) {
+      if (avatar && textarea && markdownBtn && previewBtn && sendBtn && commentContainer && metaInputs.length > 0) {
         console.log('Twikoo元素已加载，开始修改样式');
         obs.disconnect(); // 停止观察
 
         // 修改头像样式
         avatar.style.display = 'none'
+
+        // 修改预览按钮样式
+        previewBtn.style.display = 'none'
+        markdownBtn.style.display = 'none'
+
+        // 修改发送按钮样式
+        Object.assign(sendBtn.style, {
+          background: '#F44336',
+          padding: '.5rem 1.5rem',
+          borderRadius: '4px',
+          color: '#fff',
+          fontSize: '14px'
+        })
+
+        // 修改输入框样式
+        if (textarea) {
+          Object.assign(textarea.style, {
+            outline: 'none',
+            border: 0,
+            borderRadius: '3px',
+            width: '100%',
+            minHeight: '140px',
+            height: 'auto',
+            lineHeight: '1.5',
+            backgroundColor: '#f0f3f8',
+            padding: '.375rem .75rem',
+            overflow: 'auto',
+            resize: 'none',
+            fontSize: '15px'
+          })
+        }
 
         // 修改输入框样式
         metaInputs.forEach(meta => {
@@ -319,8 +355,14 @@ const LayoutSlug = props => {
             })
             input.placeholder = tip; // 设置占位符为提示文本
           }
-          
+        })
 
+        // 修改评论区样式
+        const avatarList = commentContainer.querySelectorAll('.tk-avatar')
+        avatarList.forEach(avatar => {
+          Object.assign(avatar.style, {
+            borderRadius: '50%'
+          })
         })
       }
     })

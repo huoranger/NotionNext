@@ -17,13 +17,30 @@ const Style = () => {
       --color-bg: hsl(231, 14%, 10%);
     }
 
-    // 滚动条
+    /* 整个滚动条 */
+    ::-webkit-scrollbar {
+    width: 12px;  /* 垂直滚动条宽度 */
+    height: 12px; /* 水平滚动条高度 */
+    }
+
+    /* 滚动条轨道 */
+    ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+    }
+
+    /* 滚动条滑块 */
     ::-webkit-scrollbar-thumb {
-      background-color: #a8a8a8;
-      background-clip: padding-box ！important;
-      border: 3px solid transparent !important;
-      border-radius: 5px;
-  }
+    background-color: #a8a8a8;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    }
+
+    /* 鼠标悬停在滑块上时的样式 */
+    ::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+    }
 
     body {
       font-family: "glyph-correction", "I.MingCP", Amstelvar, "Misans";
