@@ -291,9 +291,11 @@ const LayoutSlug = props => {
       const markdownBtn = twikooContainer.querySelector('.__markdown')
       const sendBtn = twikooContainer.querySelector('.tk-send')
       const commentContainer = twikooContainer.querySelector('.tk-comments-container')
+      const actions = twikooContainer.querySelector('.tk-row.actions')
+      
       
       // 确保所有需要的元素都存在
-      if (avatar && textarea && markdownBtn && previewBtn && sendBtn && commentContainer && metaInputs.length > 0) {
+      if (avatar && textarea && markdownBtn && previewBtn && sendBtn && commentContainer && actions && metaInputs.length > 0) {
         console.log('Twikoo元素已加载，开始修改样式');
         obs.disconnect(); // 停止观察
 
@@ -312,6 +314,10 @@ const LayoutSlug = props => {
           color: '#fff',
           fontSize: '14px'
         })
+        Object.assign(actions.style, {
+          marginLeft: 0
+        })
+        
 
         // 修改输入框样式
         if (textarea) {
